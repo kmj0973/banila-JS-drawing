@@ -74,6 +74,8 @@ function onDestroyClick(event){
 }
 function onEraserClick(event){
     ctx.strokeStyle = filledColor;
+    isFilling = false;
+    modeBtn.innerText = "Draw";
 }
 canvas.addEventListener("mousedown", onCanvasClick);
 canvas.addEventListener("mousemove", onMove);
