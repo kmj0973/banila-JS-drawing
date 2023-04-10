@@ -1,6 +1,7 @@
 const modeBtn = document.querySelector("#mode-btn");
 const destroyBtn = document.querySelector("#destroy-btn");
 const eraserBtn = document.querySelector("#eraser-btn");
+const fileBtn = document.querySelector("#file");
 
 const canvas = document.querySelector("canvas");
 const lineWidth = document.querySelector("#line-width");
@@ -77,6 +78,17 @@ function onEraserClick(event){
     isFilling = false;
     modeBtn.innerText = "Draw";
 }
+function onFileChange(event){
+    const file = event.target.files[0]; // 파일 접근
+    const url = URL.createObjectURL(file); // url로 변환
+    const image = new Image();
+    image.src = url;
+
+    image.onload = function() {
+        ctx.drawImage(image,0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+        fileBtn.value = null;
+    }
+}
 canvas.addEventListener("mousedown", onCanvasClick);
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", onMouseDown);
@@ -89,6 +101,7 @@ lineWidth.addEventListener("change", onLineWidthChange);
 
 colorOptions.forEach(color => color.addEventListener("click",onColorClick));
 
+fileBtn.addEventListener("change", onFileChange);
 modeBtn.addEventListener("click",onModeClick);
 destroyBtn.addEventListener("click", onDestroyClick);
 eraserBtn.addEventListener("click",onEraserClick);
