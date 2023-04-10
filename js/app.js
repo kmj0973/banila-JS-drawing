@@ -1,16 +1,26 @@
+const modeBtn = document.querySelector("#mode-btn");
+const destroyBtn = document.querySelector("#destroy-btn");
+const eraserBtn = document.querySelector("#eraser-btn");
+
 const canvas = document.querySelector("canvas");
 const lineWidth = document.querySelector("#line-width");
 const lineColor = document.querySelector("#line-color");
 const colorOptions = Array.from(document.getElementsByClassName("color-option"));
+//getElemetByClass는 htmlcollection을 리턴하기 떄문에 array from을 통해 array형태로 변환함.
 //context = brush(붓)
 const ctx = canvas.getContext("2d");
 
-canvas.width = 800;
-canvas.height = 800;
+const CANVAS_WIDTH = 800;
+const CANVAS_HEIGHT = 800;
+canvas.width = CANVAS_WIDTH;
+canvas.height = CANVAS_HEIGHT;
 
 ctx.lineWidth = lineWidth.value;
 
 let isPainting =false;
+let isFilling = false;
+let filledColor = "white";
+
 function onMove(event){
     if(isPainting){
         ctx.lineTo(event.offsetX,event.offsetY);
@@ -34,12 +44,38 @@ function onLineColorChange(event) {
     ctx.fillStyle = event.target.value;
 }
 function onColorClick(event) {
-    const colorset = event.target.dataset.color;
+    const colorset = event.target.dataset.color; //html에서 data-를 사용하여 dataset을 사용할 수 있게 함.
     ctx.strokeStyle = colorset;
     ctx.fillStyle = colorset;
     lineColor.value = colorset;
 }
-
+function onModeClick(event){
+    if(isFilling) {
+        isFilling = false;
+        modeBtn.innerText = "Draw";
+    }
+    else{
+        isFilling = true;
+        modeBtn.innerText = "Fill";
+    }
+}
+function onCanvasClick(event){
+    if(isFilling){
+        ctx.fillRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+        filledColor = ctx.fillStyle;
+        
+    }
+}
+function onDestroyClick(event){
+    ctx.fillStyle = "white";
+    ctx.fillRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+    ctx.strokeStyle = "black";
+    lineColor.value = "black";
+}
+function onEraserClick(event){
+    ctx.strokeStyle = filledColor;
+}
+canvas.addEventListener("mousedown", onCanvasClick);
 canvas.addEventListener("mousemove", onMove);
 canvas.addEventListener("mousedown", onMouseDown);
 canvas.addEventListener("mouseup",onMouseUp);
@@ -50,6 +86,10 @@ lineColor.addEventListener("change",onLineColorChange);
 lineWidth.addEventListener("change", onLineWidthChange);
 
 colorOptions.forEach(color => color.addEventListener("click",onColorClick));
+
+modeBtn.addEventListener("click",onModeClick);
+destroyBtn.addEventListener("click", onDestroyClick);
+eraserBtn.addEventListener("click",onEraserClick);
 //ctx.rect(50,50,100,100); //rect() = 사각형 선그리기 , 선의 색상이 정해지지 않았기 때문에 보이지 않음.
 //rect()는 shortcut(지름길)로 간편하게 사용이 가능하다.
 //하지만 이것보다 moveTo()와 lineTo()를 사용하여 좀더 창의적이게 그릴 수 있음.
