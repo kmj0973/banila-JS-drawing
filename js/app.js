@@ -14,8 +14,8 @@ const colorOptions = Array.from(document.getElementsByClassName("color-option"))
 //context = brush(붓)
 const ctx = canvas.getContext("2d");
 
-const CANVAS_WIDTH = 800;
-const CANVAS_HEIGHT = 800;
+const CANVAS_WIDTH = 700;
+const CANVAS_HEIGHT = 700;
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
 for(var i=0;i<colorOptions.length;i++){
@@ -42,6 +42,7 @@ function onMouseDown(event){
 }
 function onMouseUp(event){
     isPainting = false;
+    ctx.beginPath();
 }   
 function onLineWidthChange(event) { //선 변경
     ctx.lineWidth = event.target.value;
@@ -104,7 +105,7 @@ function onDoubleClick(event) {
     if(text != ""){
     ctx.save(); //ctx의 현재 상태, 색상, 스타일 등 모든 것을 저장함.
     ctx.lineWidth = 1;
-    ctx.font = "58px serif";
+    ctx.font = "bold 58px serif";
     ctx.fillText(text, event.offsetX,event.offsetY);
     ctx.restore(); //save와 restore사이에 일어난 어떠한 수정들은 저장되지 않음.
     }
