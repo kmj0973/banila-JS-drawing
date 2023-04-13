@@ -9,7 +9,6 @@
 </head>
 <body>
     <div class = "color-options">
-        <input type = "color" id = "line-color" />
         <div class="color-option" style="background-color:#1abc9c" data-color ="#1abc9c"></div>
         <div class="color-option" style="background-color:#3498db" data-color ="#3498db"></div>
         <div class="color-option" style="background-color:#34495e" data-color ="#34495e"></div>
@@ -17,10 +16,16 @@
         <div class="color-option" style="background-color:#8e44ad" data-color ="#8e44ad"></div>
         <div class="color-option" style="background-color:#f1c40f" data-color ="#f1c40f"></div>
         <div class="color-option" style="background-color:#e74c3c" data-color ="#e74c3c"></div>
-        <div class="color-option" style="background-color:#95a5a6" data-color ="#95a5a6"></div>
         <div class="color-option" style="background-color:#d35400" data-color ="#d35400"></div>
         <div class="color-option" style="background-color:#2ecc71" data-color ="#2ecc71"></div>
         <div class="color-option" style="background-color:#e67e22" data-color ="#e67e22"></div>
+    </div>
+    <div class="wrap2">
+        <label for ="line-color" class="fist"><img src="img/fist.png" id="fist"/></label>
+        <input type = "color" id = "line-color" />
+        <div class ="baloons">
+            <img src="img/baloons.png" id="baloons"></img>
+        </div>
     </div>
     <div class="wrap">
         <div class ="poo">
@@ -35,7 +40,7 @@
     <button id = "mode-btn">🩸 Draw</button>
     <button id = "destroy-btn">💣 Destroy</button>
     <button id = "eraser-btn">❌ Eraser</button>
-    <label for="file">
+    <label for="file" class="file">
         💹 Add Photo
         <input type = "file" accept ="image/*" id = "file"/></label>
     <input type = "text" id= "text" placeholder="Add text here... :)"/>

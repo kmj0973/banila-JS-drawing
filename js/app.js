@@ -1,4 +1,8 @@
 
+
+const baloons = document.querySelector("#baloons");
+
+
 const modeBtn = document.querySelector("#mode-btn");
 const destroyBtn = document.querySelector("#destroy-btn");
 const eraserBtn = document.querySelector("#eraser-btn");
@@ -9,13 +13,14 @@ const textInput = document.querySelector("#text");
 const canvas = document.querySelector("canvas");
 const lineWidth = document.querySelector("#line-width");
 const lineColor = document.querySelector("#line-color");
+const fist = document.querySelector("#fist");
 const colorOptions = Array.from(document.getElementsByClassName("color-option"));
 //getElemetByClass는 htmlcollection을 리턴하기 떄문에 array from을 통해 array형태로 변환함.
 //context = brush(붓)
 const ctx = canvas.getContext("2d");
 
-const CANVAS_WIDTH = 700;
-const CANVAS_HEIGHT = 700;
+const CANVAS_WIDTH = 400;
+const CANVAS_HEIGHT = 400;
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
 for(var i=0;i<colorOptions.length;i++){
@@ -53,9 +58,12 @@ function onLineColorChange(event) {
 }
 function onColorClick(event) {
     const colorset = event.target.dataset.color; //html에서 data-를 사용하여 dataset을 사용할 수 있게 함.
+    console.log(colorset);
     ctx.strokeStyle = colorset;
     ctx.fillStyle = colorset;
     lineColor.value = colorset;
+    fist.style.dropShadow="0 0 0 red";
+    //fist.style.webkitFilter.dropShadow="0 0 0 red";
 }
 function onModeClick(event){
     if(isFilling) {
@@ -118,6 +126,29 @@ function onSaveClick(event){
     a.download = "myDrawing.png";
     a.click(); //click을 한다는 함수속성이다. fake click을 해주어 이미지를 저장하게 한다.
 }
+function onClickBaloons(event){
+    console.log(event);
+    if(event.offsetX>=96 && event.offsetX<=261 && event.offsetY>=35 && event.offsetY<=209){
+        ctx.strokeStyle = "yellow";
+        ctx.fillStyle = "yellow";
+        lineColor.value =  "#ffff00";
+    }
+    if(event.offsetX>=271 && event.offsetX<=391 && event.offsetY>=123 && event.offsetY<=264){
+        ctx.strokeStyle = "lawngreen";
+        ctx.fillStyle = "green";
+        lineColor.value =  "#00FF00";
+    }
+    if(event.offsetX>=98 && event.offsetX<=260 && event.offsetY>=215 && event.offsetY<=429){
+        ctx.strokeStyle = "blue";
+        ctx.fillStyle = "blue";
+        lineColor.value =  "#0000FF";
+    }
+    if(event.offsetX>=271 && event.offsetX<=397 && event.offsetY>=280 && event.offsetY<=478){
+        ctx.strokeStyle = "red";
+        ctx.fillStyle = "red";
+        lineColor.value =  "#ff0000";
+    }
+}
 
 canvas.addEventListener("dblclick",onDoubleClick);
 canvas.addEventListener("mousedown", onCanvasClick);
@@ -137,6 +168,8 @@ fileBtn.addEventListener("change", onFileChange);
 modeBtn.addEventListener("click",onModeClick);
 destroyBtn.addEventListener("click", onDestroyClick);
 eraserBtn.addEventListener("click",onEraserClick);
+
+baloons.addEventListener("click",onClickBaloons);
 //ctx.rect(50,50,100,100); //rect() = 사각형 선그리기 , 선의 색상이 정해지지 않았기 때문에 보이지 않음.
 //rect()는 shortcut(지름길)로 간편하게 사용이 가능하다.
 //하지만 이것보다 moveTo()와 lineTo()를 사용하여 좀더 창의적이게 그릴 수 있음.
