@@ -16,10 +16,11 @@ body{
 }
 .wrap2{
     position: relative;
+    top:50px;
 }
 .fist{
-    bottom:0%;
-    left: 40%;
+    bottom:-9%;
+    left: 38%;
     position: absolute;
 }
 #fist{
@@ -29,20 +30,17 @@ body{
     /* filter :opacity(0.8) drop-shadow(0 0 0 gray); */
     filter: invert(15%) sepia(100%) saturate(7151%) hue-rotate(5deg) brightness(92%) contrast(129%);
 }
-.honey img{
-    width:500px;
-}
 .baloons{
     cursor: pointer;
     background-color:transparent;
 }
 .baloons img{
-    width:500px;
+    width:330px;
 }
 .poo img{
     bottom:240%;
     width: 700px;
-    
+    border-radius: 50px;
     display: flex;
     
 }
@@ -61,7 +59,6 @@ body {
     display:flex;
     justify-content:center;
     align-items: center;
-    
 }
 canvas{
     display: flex;
@@ -71,14 +68,141 @@ canvas{
     border-radius: 30px;
 
 }
+.tools{
+    position: relative;
+    top: 80px;
+    left:40px;
+    width:400px;
+    height: 510px;
+    display:flex;
+    border-radius: 14px;
+    box-shadow: 4px 4px 5px #76420e;
+    flex-direction: column;
+}
+.honey{ 
+    align-items: center;
+    display:flex;
+    width:400px;
+    height:60px;
+    border-top-right-radius: 14px;
+    border-top-left-radius: 14px;
+    background-color: rgb(248, 206, 35);
+}
+#triangle{
+    top:20px;
+    z-index: 1;
+    position:relative;
+    width: 60px;
+    height: 200px;
+    clip-path: ellipse(20px 30px);
+    background-color: rgb(248, 206, 35);
+}
+#bottom-angle{
+    top:-38.5px;
+    left:-45.1px;
+    z-index: 2;
+    position:absolute;
+    width: 100px;
+    height: 200px;
+    clip-path: ellipse(4.9px 10px);
+    background-color: #b56413;
+}
+#bottom-angle1{
+    top:-38.5px;
+    left:345.1px;
+    z-index: 2;
+    position:absolute;
+    width: 100px;
+    height: 200px;
+    clip-path: ellipse(4.9px 10px);
+    background-color: #b56413;
+}
+#bottom-triangle{
+    top:-33px;
+    left:7.1px;
+    z-index: 2;
+    position:absolute;
+    width: 100px;
+    height: 200px;
+    clip-path: ellipse(10.3px 20px);
+    background-color: #b56413;
+    /* #b56413 */
+}
+#bottom-triangle1{
+    top:-33px;
+    left:64.2px;
+    z-index: 2;
+    position:absolute;
+    width: 100px;
+    height: 200px;
+    clip-path: ellipse(10.3px 20px);
+    background-color: #b56413;
+    /* #b56413 */
+}
+#bottom-triangle2{
+    top:-33px;
+    left:121.45px;
+    z-index: 2;
+    position:absolute;
+    width: 100px;
+    height: 200px;
+    clip-path: ellipse(10.3px 20px);
+    background-color: #b56413;
+    /* #b56413 */
+}
+#bottom-triangle3{
+    top:-33px;
+    left:178.55px;
+    z-index: 2;
+    position:absolute;
+    width: 100px;
+    height: 200px;
+    clip-path: ellipse(10.3px 20px);
+    background-color: #b56413;
+    /* #b56413 */
+}
+#bottom-triangle4{
+    top:-33px;
+    left:235.65px;
+    z-index: 2;
+    position:absolute;
+    width: 100px;
+    height: 200px;
+    clip-path: ellipse(10.3px 20px);
+    background-color: #b56413;
+    /* #b56413 */
+}
+#bottom-triangle5{
+    top:-33px;
+    left:292.75px;
+    z-index: 2;
+    position:absolute;
+    width: 100px;
+    height: 200px;
+    clip-path: ellipse(10.3px 20px);
+    background-color: #b56413;
+    /* #b56413 */
+}
 .btns {
+    position:relative;
+    padding-top: 50px;
+    padding-left:50px;
+    padding-right:50px;
+    width:300px;
+    height:450px;
+    /* border-radius: 14px; */
+    border-bottom-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    background-color: #b56413;  
     display:flex;
     flex-direction: column;
     gap:15px
 }
 .color-options{
+    
     align-items: center;
-    display:flex;
+    /* display:flex; */
+    display:none;
     flex-direction: column;
     gap: 10px;
 }
@@ -97,7 +221,6 @@ input#line-color{
     display: none;
     background-color: white;
 }
-
 button,label.file {
     all:unset;
     padding:10px 0px;
