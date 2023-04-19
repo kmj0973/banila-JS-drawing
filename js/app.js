@@ -14,7 +14,7 @@ const canvas = document.querySelector("canvas");
 const lineWidth = document.querySelector("#line-width");
 const lineColor = document.querySelector("#line-color");
 const fist = document.querySelector("#fist");
-const colorOptions = Array.from(document.getElementsByClassName("color-option"));
+const colorOptions =document.querySelector(".color-option");
 //getElemetByClass는 htmlcollection을 리턴하기 떄문에 array from을 통해 array형태로 변환함.
 //context = brush(붓)
 const ctx = canvas.getContext("2d");
@@ -23,15 +23,15 @@ const CANVAS_WIDTH = 400;
 const CANVAS_HEIGHT = 400;
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
-for(var i=0;i<colorOptions.length;i++){
-    colorOptions[i].style.boxShadow =`-3px 4px 5px ${colorOptions[i].dataset.color}`;
-}   
+// for(var i=0;i<colorOptions.length;i++){
+//     colorOptions[i].style.boxShadow =`-3px 4px 5px ${colorOptions[i].dataset.color}`;
+// }   
 ctx.lineWidth = lineWidth.value;
 ctx.lineCap = "round";
 
 let isPainting =false;
 let isFilling = false;
-let filledColor = "white";
+let filledColor = 'white';
 
 function onMove(event){
     if(isPainting){
@@ -55,14 +55,18 @@ function onLineWidthChange(event) { //선 변경
 function onLineColorChange(event) {
     ctx.strokeStyle = event.target.value;
     ctx.fillStyle = event.target.value;
+    colorOptions.style.backgroundColor = event.target.value;
+    colorOptions.value = event.target.value;
+    lineColor.value = event.target.value;
 }
 function onColorClick(event) {
     const colorset = event.target.dataset.color; //html에서 data-를 사용하여 dataset을 사용할 수 있게 함.
     console.log(colorset);
     ctx.strokeStyle = colorset;
     ctx.fillStyle = colorset;
-    lineColor.value = colorset;
-    fist.style.dropShadow="0 0 0 red";
+    colorOptions.style.backgroundColor = event.target.value;
+    colorOptions.value = event.target.value;
+    lineColor.value = event.target.value;
     //fist.style.webkitFilter.dropShadow="0 0 0 red";
 }
 function onModeClick(event){
@@ -161,7 +165,8 @@ canvas.addEventListener("mouseleave", onMouseUp);
 lineColor.addEventListener("change",onLineColorChange);
 lineWidth.addEventListener("change", onLineWidthChange);
 
-colorOptions.forEach(color => color.addEventListener("click",onColorClick));
+colorOptions.addEventListener("change",onLineColorChange);
+colorOptions.addEventListener("click",onColorClick);
 
 saveBtn.addEventListener("click", onSaveClick);
 fileBtn.addEventListener("change", onFileChange);

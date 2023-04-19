@@ -198,7 +198,7 @@ canvas{
     background-color: #b56413;  
     display:flex;
     flex-direction: column;
-    gap:40px;
+    gap:30px;
     align-items:center;
 }
 .drawing-btns{
@@ -214,24 +214,37 @@ canvas{
     width:120px;
     background-color:rgb(248, 206, 35) ;
 } */
-.color-options{
+/* .color-options{
     
     align-items: center;
-    /* display:flex; */
+    display:flex;
     display:none;
     flex-direction: column;
     gap: 10px;
+} */
+.color-option:hover{
+    transform: scale(1.2);
 }
-.color-option{
+#line-width{
+    width:220px;
+}
+#color-option{
+    display: none;
+    background-color: white;
+}
+label.color-option{
+    background-color: black;
+    bottom:-13%;
+    left: 38%;
+    z-index: 5;
+    position: absolute;
     width: 50px;
     height: 50px;
     border-radius: 50%;
     cursor:pointer;
     border:5px solid white;
+    box-shadow: -3px 4px 3px;
     transition: transform ease-in-out .1s;
-}
-.color-option:hover{
-    transform: scale(1.2);
 }
 input#line-color{
     display: none;
@@ -259,9 +272,43 @@ input#file{
 }
 input#text {
     all:unset;
+    width:270px;
+    height:18px;
     padding:10px 0px;
     border-radius: 10px;
-    font-weight: 500;
     text-align: center;
-    background-color: white;
+    font-weight:800;
+    color: #b56413;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgb(248, 206, 35) ;
+}
+input#text1 {
+    all:unset;
+    width:40px;
+    height:18px;
+    padding:10px 0px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight:800;
+    color: #b56413;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgb(248, 206, 35) ;
+}
+.select {
+    all:unset;
+    height:35px;
+    border-radius: 10px;
+    background: url('https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png') calc(100% - 5px) center no-repeat;
+    width:120px;
+    background-color: rgb(248, 206, 35) ;
+    align-items: center;
+    text-align: center;
+    font-weight:800;
+    color: #b56413;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.select option{
+    background: rgb(248, 206, 35);
+    color: #b56413;
+    font-weight:800;
 }
