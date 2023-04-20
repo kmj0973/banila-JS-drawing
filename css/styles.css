@@ -78,7 +78,7 @@ canvas{
     height: 510px;
     display:flex;
     border-radius: 20px;
-    box-shadow: 4px 4px 5px #76420e;
+    box-shadow: 4px 24px 5px #76420e;
     flex-direction: column;
 }
 .honey{ 

@@ -2,8 +2,11 @@
 
 const baloons = document.querySelector("#baloons");
 
+const fontStyleSelect = document.querySelector("#font-st");
+const fontSizeSelect = document.querySelector("#font-sz");
 
 const modeBtn = document.querySelector("#mode-btn");
+const fillBtn = document.querySelector("#fill-btn");
 const destroyBtn = document.querySelector("#destroy-btn");
 const eraserBtn = document.querySelector("#eraser-btn");
 const saveBtn = document.querySelector("#save");
@@ -12,7 +15,8 @@ const textInput = document.querySelector("#text");
 
 const canvas = document.querySelector("canvas");
 const lineWidth = document.querySelector("#line-width");
-const lineColor = document.querySelector("#line-color");
+const lineWidthNum = document.querySelector("#text1");
+// const lineColor = document.querySelector("#line-color");
 const fist = document.querySelector("#fist");
 const colorOptions =document.querySelector(".color-option");
 //getElemetByClass는 htmlcollection을 리턴하기 떄문에 array from을 통해 array형태로 변환함.
@@ -32,7 +36,7 @@ ctx.lineCap = "round";
 let isPainting =false;
 let isFilling = false;
 let filledColor = 'white';
-
+colorOptions.style.backgroundColor = 'black';
 function onMove(event){
     if(isPainting){
         ctx.lineTo(event.offsetX,event.offsetY);
@@ -51,33 +55,37 @@ function onMouseUp(event){
 }   
 function onLineWidthChange(event) { //선 변경
     ctx.lineWidth = event.target.value;
+    lineWidthNum.value = event.target.value;
+}
+function onLineWidthSubmit(event){
+    const size = lineWidthNum.value;
+    ctx.lineWidth = size;
+    lineWidth.value = size;
 }
 function onLineColorChange(event) {
     ctx.strokeStyle = event.target.value;
     ctx.fillStyle = event.target.value;
     colorOptions.style.backgroundColor = event.target.value;
     colorOptions.value = event.target.value;
-    lineColor.value = event.target.value;
+    // lineColor.value = event.target.value;
 }
 function onColorClick(event) {
     const colorset = event.target.dataset.color; //html에서 data-를 사용하여 dataset을 사용할 수 있게 함.
     console.log(colorset);
     ctx.strokeStyle = colorset;
     ctx.fillStyle = colorset;
-    colorOptions.style.backgroundColor = event.target.value;
-    colorOptions.value = event.target.value;
-    lineColor.value = event.target.value;
+    colorOptions.style.backgroundColor = colorset;
+    colorOptions.value = colorset;
+    // lineColor.value = event.target.value;
     //fist.style.webkitFilter.dropShadow="0 0 0 red";
 }
 function onModeClick(event){
-    if(isFilling) {
         isFilling = false;
-        modeBtn.innerText = "Draw";
-    }
-    else{
+        ctx.fillStyle = colorOptions.style.backgroundColor;
+        ctx.strokeStyle = colorOptions.style.backgroundColor;
+}
+function onFillClick(event){
         isFilling = true;
-        modeBtn.innerText = "Fill";
-    }
 }
 function onCanvasClick(event){
     if(isFilling){
@@ -90,15 +98,15 @@ function onDestroyClick(event){
     ctx.fillRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     ctx.fillStyle = "black";
     ctx.strokeStyle = "black";
-    lineColor.value = "black";
+    colorOptions.style.backgroundColor = "black";
     isFilling = false;
-    modeBtn.innerText = "Draw";
+    modeBtn.innerText = "🩸 Draw";
     filledColor = "white";
 }
 function onEraserClick(event){
     ctx.strokeStyle = filledColor;
     isFilling = false;
-    modeBtn.innerText = "Draw";
+    modeBtn.innerText = "🩸 Draw";
 }
 function onFileChange(event){
     const file = event.target.files[0]; // 파일 접근 //html속성에 multiple을 넣으면 여러개의 파일을 업로드할 수 있다.
@@ -132,27 +140,29 @@ function onSaveClick(event){
 }
 function onClickBaloons(event){
     console.log(event);
-    if(event.offsetX>=96 && event.offsetX<=261 && event.offsetY>=35 && event.offsetY<=209){
+    if(event.offsetX>=42 && event.offsetX<=146 && event.offsetY>=9 && event.offsetY<=136){
         ctx.strokeStyle = "yellow";
         ctx.fillStyle = "yellow";
-        lineColor.value =  "#ffff00";
+        colorOptions.style.backgroundColor = "yellow";
+        colorOptions.value = "yellow";
     }
-    if(event.offsetX>=271 && event.offsetX<=391 && event.offsetY>=123 && event.offsetY<=264){
+    if(event.offsetX>=152 && event.offsetX<=236 && event.offsetY>=86 && event.offsetY<=181){
         ctx.strokeStyle = "lawngreen";
-        ctx.fillStyle = "green";
-        lineColor.value =  "#00FF00";
+        ctx.fillStyle = "lawngreen";
+        colorOptions.style.backgroundColor = "lawngreen";
     }
-    if(event.offsetX>=98 && event.offsetX<=260 && event.offsetY>=215 && event.offsetY<=429){
+    if(event.offsetX>=42 && event.offsetX<=149 && event.offsetY>=156 && event.offsetY<=291){
         ctx.strokeStyle = "blue";
         ctx.fillStyle = "blue";
-        lineColor.value =  "#0000FF";
+        colorOptions.style.backgroundColor = "blue";
     }
-    if(event.offsetX>=271 && event.offsetX<=397 && event.offsetY>=280 && event.offsetY<=478){
+    if(event.offsetX>=157 && event.offsetX<=397 && event.offsetY>=239 && event.offsetY<=330){
         ctx.strokeStyle = "red";
         ctx.fillStyle = "red";
-        lineColor.value =  "#ff0000";
+        colorOptions.style.backgroundColor = "red";
     }
 }
+
 
 canvas.addEventListener("dblclick",onDoubleClick);
 canvas.addEventListener("mousedown", onCanvasClick);
@@ -162,12 +172,14 @@ canvas.addEventListener("mouseup",onMouseUp);
 canvas.addEventListener("mouseleave", onMouseUp);
 
 
-lineColor.addEventListener("change",onLineColorChange);
+// lineColor.addEventListener("change",onLineColorChange);
 lineWidth.addEventListener("change", onLineWidthChange);
+lineWidthNum.addEventListener("change", onLineWidthSubmit);
 
 colorOptions.addEventListener("change",onLineColorChange);
 colorOptions.addEventListener("click",onColorClick);
 
+fillBtn.addEventListener("click", onFillClick);
 saveBtn.addEventListener("click", onSaveClick);
 fileBtn.addEventListener("change", onFileChange);
 modeBtn.addEventListener("click",onModeClick);
