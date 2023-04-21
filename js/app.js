@@ -32,6 +32,10 @@ canvas.height = CANVAS_HEIGHT;
 // }   
 ctx.lineWidth = lineWidth.value;
 ctx.lineCap = "round";
+ctx.font = "normal 12px serif";
+
+let ftStyle = "normal";
+let ftSize = "12px";
 
 let isPainting =false;
 let isFilling = false;
@@ -125,7 +129,6 @@ function onDoubleClick(event) {
     if(text != ""){
     ctx.save(); //ctx의 현재 상태, 색상, 스타일 등 모든 것을 저장함.
     ctx.lineWidth = 1;
-    ctx.font = "bold 58px serif";
     ctx.fillText(text, event.offsetX,event.offsetY);
     ctx.restore(); //save와 restore사이에 일어난 어떠한 수정들은 저장되지 않음.
     }
@@ -151,16 +154,24 @@ function onClickBaloons(event){
         ctx.fillStyle = "lawngreen";
         colorOptions.style.backgroundColor = "lawngreen";
     }
-    if(event.offsetX>=42 && event.offsetX<=149 && event.offsetY>=156 && event.offsetY<=291){
+    if(event.offsetX>=42 && event.offsetX<=155 && event.offsetY>=136 && event.offsetY<=291){
         ctx.strokeStyle = "blue";
         ctx.fillStyle = "blue";
         colorOptions.style.backgroundColor = "blue";
     }
-    if(event.offsetX>=157 && event.offsetX<=397 && event.offsetY>=239 && event.offsetY<=330){
+    if(event.offsetX>=157 && event.offsetX<=397 && event.offsetY>=190 && event.offsetY<=330){
         ctx.strokeStyle = "red";
         ctx.fillStyle = "red";
         colorOptions.style.backgroundColor = "red";
     }
+}
+function onFontStyleChange(event) {
+    ftStyle =  fontStyleSelect.options[fontStyleSelect.selectedIndex].value;
+    ctx.font = `${ftStyle} ${ftSize} serif`;
+}
+function onFontSizeChange(event){
+    ftSize =  fontSizeSelect.options[fontSizeSelect.selectedIndex].value;
+    ctx.font = `${ftStyle} ${ftSize} serif`;
 }
 
 
@@ -175,6 +186,8 @@ canvas.addEventListener("mouseleave", onMouseUp);
 // lineColor.addEventListener("change",onLineColorChange);
 lineWidth.addEventListener("change", onLineWidthChange);
 lineWidthNum.addEventListener("change", onLineWidthSubmit);
+fontStyleSelect.addEventListener("change", onFontStyleChange);
+fontSizeSelect.addEventListener("change", onFontSizeChange);
 
 colorOptions.addEventListener("change",onLineColorChange);
 colorOptions.addEventListener("click",onColorClick);
